@@ -1,0 +1,58 @@
+# Dependencies and generated web bundles
+node_modules/
+/www/
+dist/
+coverage/
+test-results/
+playwright-report/
+
+# Android generated files and local tools
+**/build/
+**/.gradle/
+**/.idea/
+**/local.properties
+/android/capacitor-cordova-android-plugins/
+/android/capacitor.settings.gradle
+/android/app/capacitor.build.gradle
+/android/app/src/main/assets/
+/android/gradle/gradle-daemon-jvm.properties
+/android/index.html
+/android/style.css
+/android/data.js
+/android/engine.js
+/android/ui.js
+
+# Credentials, signing material, and private configuration
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+**/keystore.properties
+**/key.properties
+**/google-services.json
+**/GoogleService-Info.plist
+.npmrc
+
+# Packaged apps, caches, logs, backups, and editor state
+*.apk
+*.aab
+*.apks
+*.dex
+*.class
+*.log
+*.bak
+*.sav
+*backup*.json
+.DS_Store
+Thumbs.db
+.vscode/
+.claude/
+.codex/
+.cache/
+
+# The Gradle wrapper JAR and Android PNG resources are required build inputs.

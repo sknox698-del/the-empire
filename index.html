@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Build businesses, earn influence, and uncover a city-wide mystery in The Empire.">
+  <title>The Empire — Business Strategy RPG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Splash Screen -->
+<div id="splash" role="dialog" aria-labelledby="splash-title" aria-describedby="splash-tagline">
+  <div class="splash-decoration"></div>
+  <div class="splash-content">
+    <div class="brand-mark" aria-hidden="true">
+      <span class="brand-mark-crown"></span>
+      <span class="brand-mark-building"></span>
+    </div>
+    <div class="splash-kicker">A business strategy RPG</div>
+    <h1 id="splash-title">The Empire</h1>
+    <div id="splash-subtitle">Own the streets. Shape the city.</div>
+    <p id="splash-tagline">Start with €100, build a business network, earn the city’s trust, and uncover the deal hiding in plain sight.</p>
+    <div class="splash-actions">
+      <button id="splash-start" type="button" onclick="startNewGame()">
+        <span>Build your empire</span><span aria-hidden="true">→</span>
+      </button>
+      <button id="splash-continue" type="button" hidden onclick="continueGame()">Continue saved game</button>
+    </div>
+    <div class="splash-footnote"><span></span> Your choices change the city <span></span></div>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="app" style="display:none">
+  
+  <!-- Resource Bar -->
+  <header class="resource-bar" aria-label="Player resources" data-tutorial-target="resources">
+    <div class="resource-item cash-resource">
+      <div class="resource-label"><span aria-hidden="true">◆</span> Cash</div>
+      <div class="resource-value cash" id="res-cash">€100</div>
+    </div>
+    <div class="resource-item energy-resource">
+      <div class="resource-label"><span aria-hidden="true">ϟ</span> Energy</div>
+      <div class="resource-value energy" id="res-energy">10/10</div>
+    </div>
+    <div class="resource-item reputation-resource">
+      <div class="resource-label"><span aria-hidden="true">✦</span> Reputation</div>
+      <div class="resource-value rep" id="res-rep">0</div>
+    </div>
+    <div class="resource-item day-resource">
+      <div class="resource-label"><span aria-hidden="true">◷</span> Day</div>
+      <div class="resource-value inf" id="res-day">D1</div>
+    </div>
+  </header>
+
+  <!-- Screen Content -->
+  <main id="screen-content" class="screen" tabindex="-1">
+    <!-- Dynamic content rendered here -->
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" aria-label="Main navigation" data-tutorial-target="navigation">
+    <button type="button" class="nav-item active" data-screen="dashboard" aria-label="Home" aria-current="page">
+      <span class="nav-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v9.7a.5.5 0 0 1-.5.5h-5v-7h-7v7h-5a.5.5 0 0 1-.5-.5z"/></svg></span>
+      <span class="nav-item-label">Home</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="map" aria-label="City map">
+      <span class="nav-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zm6-3v15m6-12v15"/></svg></span>
+      <span class="nav-item-label">City</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="business" aria-label="Businesses">
+      <span class="nav-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16a1 1 0 0 1 1 1v11H3V8a1 1 0 0 1 1-1Zm5 0V4h6v3M3 12h18M10 12v2h4v-2"/></svg></span>
+      <span class="nav-item-label">Business</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="investigation" aria-label="Clues">
+      <span class="nav-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></span>
+      <span class="nav-item-label">Clues</span>
+    </button>
+    <button type="button" class="nav-item" data-screen="settings" aria-label="Menu">
+      <span class="nav-item-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.8 1.8 0 0 0 .4 2l.1.1-2.8 2.8-.1-.1a1.8 1.8 0 0 0-2-.4 1.8 1.8 0 0 0-1.1 1.7v.2h-4v-.2A1.8 1.8 0 0 0 8.8 19a1.8 1.8 0 0 0-2 .4l-.1.1-2.8-2.8.1-.1a1.8 1.8 0 0 0 .4-2A1.8 1.8 0 0 0 2.7 13h-.2V9h.2a1.8 1.8 0 0 0 1.7-1.1 1.8 1.8 0 0 0-.4-2l-.1-.1L6.7 3l.1.1a1.8 1.8 0 0 0 2 .4A1.8 1.8 0 0 0 9.9 2v-.2h4V2a1.8 1.8 0 0 0 1.1 1.7 1.8 1.8 0 0 0 2-.4l.1-.1L20 6l-.1.1a1.8 1.8 0 0 0-.4 2A1.8 1.8 0 0 0 21.2 9h.2v4h-.2a1.8 1.8 0 0 0-1.8 2Z"/></svg></span>
+      <span class="nav-item-label">Menu</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- Scripts -->
+<script src="data.js"></script>
+<script src="engine.js"></script>
+<script src="ui.js"></script>
+
+<script>
+  // Global instances
+  const engine = new EmpireEngine();
+  let ui;
+
+  function startNewGame() {
+    engine.newGame();
+    ui = new EmpireUI(engine);
+    ui.init();
+    hideSplash();
+  }
+
+  function continueGame() {
+    try {
+      const latest = getLatestSave();
+      if (latest) {
+        const state = latest.state;
+        engine.loadState(state);
+        ui = new EmpireUI(engine);
+        ui.init();
+        hideSplash();
+      }
+    } catch(e) {
+      alert('Could not load save data.');
+    }
+  }
+
+  function getLatestSave() {
+    let latest = null;
+    for (let slot = 0; slot < 3; slot++) {
+      try {
+        const data = localStorage.getItem(`empire_save_${slot}`);
+        if (!data) continue;
+        const state = JSON.parse(data);
+        if (!latest || (state.saveTime || 0) > (latest.state.saveTime || 0)) latest = { slot, state };
+      } catch (error) {
+        console.warn(`Ignoring unreadable save slot ${slot + 1}.`);
+      }
+    }
+    return latest;
+  }
+
+  function hideSplash() {
+    const splash = document.getElementById('splash');
+    splash.classList.add('fade-out');
+    document.getElementById('app').style.display = 'flex';
+    setTimeout(() => { splash.style.display = 'none'; }, 500);
+  }
+
+  // Check for saved game on load
+  window.addEventListener('load', () => {
+    try {
+      const latest = getLatestSave();
+      if (latest) {
+        const continueButton = document.getElementById('splash-continue');
+        continueButton.textContent = `Continue · Day ${latest.state.day}`;
+        continueButton.hidden = false;
+      }
+    } catch(e) {}
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "the-empire-game",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A mobile-first business strategy RPG packaged for Android with Capacitor.",
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "build": "node scripts/build-web.mjs",
+    "check": "node scripts/smoke-test.mjs",
+    "android:add": "npm run build && cap add android",
+    "android:sync": "npm run build && cap sync android",
+    "android:run": "npm run build && cap run android",
+    "android:open": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.4.2",
+    "@capacitor/core": "8.4.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.4.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
