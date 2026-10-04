@@ -20,8 +20,29 @@ These describe implemented systems; they are not a claim of exhaustive gameplay 
 
 ## Preview
 
-**Screenshot placeholder:** a verified mobile gameplay screenshot has not yet been added. The city map and interface are rendered from the actual HTML, CSS, and SVG code; no concept images are presented as gameplay.
+### Command Center
 
+The main dashboard tracks cash, energy, reputation, time, and access to the game's core systems.
+
+![The Empire command center](docs/images/empire-dashboard.png)
+
+### City Map
+
+The interactive city map provides access to neighborhoods, businesses, locations, and exploration.
+
+![The Empire city map](docs/images/empire-city-map.png)
+
+### Business Management
+
+Players can build and manage businesses, employees, upgrades, expenses, and revenue.
+
+![The Empire business management](docs/images/empire-business.png)
+
+### Character and Story Interaction
+
+The game includes character relationships, dialogue choices, clues, and a city-wide mystery.
+
+![The Empire character interaction](docs/images/empire-conversation.png)
 ## Run locally
 
 Install Node.js **22 or newer**, then:
